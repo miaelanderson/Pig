@@ -14,7 +14,7 @@ struct ContentView: View {
     @State private var rotation = 0.0
     var body: some View {
         ZStack {
-            Color.gray.opacity(0.7).ignoresSafeArea()
+            Color.pink.opacity(0.2).ignoresSafeArea()
             VStack {
                 Image("Pig").resizable().frame(width: 150, height: 150)
                     .imageScale(.large)
@@ -45,6 +45,9 @@ struct ContentView: View {
                     .buttonStyle(CustomButtonStyle())
                 }
                 CustomText(text: "Game Score: \(gameScore)")
+                NavigationLink("How to Play", destination: InstructionsView())
+                    .font(Font.custom("Marker Felt", size: 24))
+                    .padding()
                 Spacer()
             }
         }
@@ -83,9 +86,35 @@ struct ContentView: View {
                 .frame(width: 50)
                 .font(Font.custom("Marker Felt", size: 24))
                 .padding()
-                .background(.red).opacity(configuration.isPressed ? 0.0 : 1.0)
+                .background(.pink).opacity(configuration.isPressed ? 0.0 : 1.0)
                 .foregroundColor(.white)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
+        }
+    }
+    struct InstructionsView: View {
+        var body: some View {
+            NavigationView {
+                ZStack {
+                    Color.pink.opacity(0.2).ignoresSafeArea()
+                    VStack {
+                        Image("Pig").resizable().frame(width: 150, height: 150)
+                        CustomText(text: "Pig")
+                        VStack(alignment: .leading) {
+                            Text("In the game of pig, players take individual turns. Each turn, a player repeadedly rolls a single die until either a pig is rolled or the player decides to \"hold\".")
+                                .padding()
+                            Text("If a player rolls a pig, they score nothing and it is the next players turn.")
+                                .padding()
+                            Text("If the player rolls any other number, it is added to their turn total, and the player's turn continues.")
+                                .padding()
+                            Text("If the player chooses to \"hold\", their turn total is added to the game score, and it becomes the next players turn")
+                                .padding()
+                            Text("A player wins the game when the score becomes 100 or more on their turn.")
+                                .padding()
+                        }
+                        Spacer()
+                    }
+                }
+            }
         }
     }
 }
