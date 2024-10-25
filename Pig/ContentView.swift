@@ -14,6 +14,7 @@ struct ContentView: View {
     @State private var rotation = 0.0
     @State private var gameOver = false
     var body: some View {
+        NavigationView {
         ZStack {
             Color.pink.opacity(0.2).ignoresSafeArea()
             VStack {
@@ -58,6 +59,7 @@ struct ContentView: View {
                 }
                 .font(Font.custom("Marker Felt", size: 24))
                 Spacer()
+            }
             }
         }
         .alert(isPresented: $gameOver, content: {
@@ -111,7 +113,6 @@ struct ContentView: View {
     }
     struct InstructionsView: View {
         var body: some View {
-            NavigationView {
                 ZStack {
                     Color.pink.opacity(0.2).ignoresSafeArea()
                     VStack {
@@ -132,7 +133,6 @@ struct ContentView: View {
                         Spacer()
                     }
                 }
-            }
         }
     }
 }
